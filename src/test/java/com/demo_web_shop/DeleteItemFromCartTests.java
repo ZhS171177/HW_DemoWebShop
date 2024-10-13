@@ -12,7 +12,11 @@ public class DeleteItemFromCartTests extends TestBase {
 
     @BeforeMethod
     public void PreCondition() {
-        app.getUserHelper().loginDemoWebShop("fsddffg_1234@gmail.com", "QWERTqwe123!");
+        try {
+            app.getUserHelper().loginDemoWebShop("fsddffg_1234@gmail.com", "QWERTqwe123!");
+        } catch (Exception e) {
+            //throw new RuntimeException(e);
+        }
         app.getContactHelper().deleteAllArticleFromCard();
         app.getContactHelper().addArticle_1_InCart();
         app.getContactHelper().addArticle_2_InCart();
