@@ -1,5 +1,6 @@
 package com.demo_web_shop;
 
+import com.demo_web_shop.model.Product;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -20,9 +21,20 @@ public class AddItemToCartTests extends TestBase {
 
     @Test
     public void addItemCartPositiveTest() {
-        app.getContactHelper().addArticle_1_InCart();
+        app.getContactHelper()
+                .selectProduct(new Product()
+                        .setCategory("Computer")
+                        .setSubCategory("Notebooks")
+                        .setProductName("14.1-inch Laptop"));
+        Assert.assertTrue(app.getUserHelper().isElementPresent(By.xpath
+                ("//p[contains(text(),'The product has been added to your ')]")));
         Assert.assertTrue(app.getUserHelper().isElementPresent(By.xpath("//span[.='(1)']")));
-        app.getContactHelper().addArticle_2_InCart();
+        app.getContactHelper()
+                .selectProductWoSubcategory(new Product()
+                        .setCategory("Apparel & Shoes")
+                        .setProductName("Blue and green Sneaker"));
+        Assert.assertTrue(app.getUserHelper().isElementPresent(By.xpath
+                ("//p[contains(text(),'The product has been added to your ')]")));
         Assert.assertTrue(app.getUserHelper().isElementPresent(By.xpath("//span[.='(2)']")));
         System.out.println("Two products added");
         app.getContactHelper().clickButtonShoppingCart();

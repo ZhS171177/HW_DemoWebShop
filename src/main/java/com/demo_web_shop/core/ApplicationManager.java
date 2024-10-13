@@ -1,7 +1,7 @@
 package com.demo_web_shop.core;
 
 import com.demo_web_shop.fw.HomeHelper;
-import com.demo_web_shop.fw.ContactHelper;
+import com.demo_web_shop.fw.ProductHelper;
 import com.demo_web_shop.fw.UserHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,7 +17,7 @@ public class ApplicationManager {
     public WebDriver driver;
     UserHelper userHelper;
     HomeHelper homeHelper;
-    ContactHelper contactHelper;
+    ProductHelper contactHelper;
     private final String browser;
 
     public ApplicationManager(String browser) {
@@ -42,11 +42,11 @@ public class ApplicationManager {
        // driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com");
         driver.manage().window().maximize();//разворачивает браузер на весь экран
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));// неявное ожидание 10 c
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));// неявное ожидание 10 c
 
         userHelper = new UserHelper(driver);
         homeHelper = new HomeHelper(driver);
-        contactHelper = new ContactHelper(driver);
+        contactHelper = new ProductHelper(driver);
     }
 
 
@@ -58,7 +58,7 @@ public class ApplicationManager {
         return homeHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ProductHelper getContactHelper() {
         return contactHelper;
     }
     public void stop() {

@@ -19,7 +19,7 @@ public class BaseHelper {
     }
 
     public boolean isElementPresent(By locator) {
-        System.out.println("Проверка есть ли елемент [ " + locator + "] на странице");
+        //System.out.println("Проверка есть ли елемент [ " + locator + "] на странице");
         return driver.findElements(locator).size() > 0;
     }
 

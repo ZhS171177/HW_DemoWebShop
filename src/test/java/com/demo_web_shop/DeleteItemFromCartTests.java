@@ -1,7 +1,7 @@
 package com.demo_web_shop;
 
+import com.demo_web_shop.model.Product;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,12 +18,19 @@ public class DeleteItemFromCartTests extends TestBase {
             //throw new RuntimeException(e);
         }
         app.getContactHelper().deleteAllArticleFromCard();
-        app.getContactHelper().addArticle_1_InCart();
-        app.getContactHelper().addArticle_2_InCart();
+        app.getContactHelper()
+                .selectProduct(new Product()
+                        .setCategory("Computer")
+                        .setSubCategory("Notebooks")
+                        .setProductName("14.1-inch Laptop"));
+        app.getContactHelper()
+                .selectProductWoSubcategory(new Product()
+                        .setCategory("Apparel & Shoes")
+                        .setProductName("Blue and green Sneaker"));
     }
 @Test
 public void deleteAllItemsFromCartTest(){
-    WebElement element = app.driver.findElement(By.xpath("//span[.='(2)']"));
+        app.getHomeHelper().isElementPresent(By.xpath("//span[.='(2)']"));
     app.getContactHelper().deleteAllArticleFromCard();
     Assert.assertTrue(app.getUserHelper().isElementPresent(By.xpath("//span[.='(0)']")));
     app.getContactHelper().clickButtonShoppingCart();
